@@ -34,7 +34,7 @@ assert((ch == 'Y') || (ch == 'N')) # Very bad idea!
 
 ### Assertions and Side Effects
 
-Don't use assertion the codition has side effects.
+Don't use assertion if the condition has side effects.
 
 ```java
 
@@ -51,12 +51,13 @@ while(iter.hasMoreElements()) {
 
 Which of the "impossible" things can happen ?
 
-. A month with fewer than 28 days -> possible
-. Error code from a system call: can't access the current directory -> possible
-. In C++: a=2; b = 3; but (a+b) does not equal 5 -> possible
-. A triangle with an interior angle sum = 180° -> possible
-. A minute that doesn't have 60 seconds -> possible
-. (a+1) <= a -> possible
+- A month with fewer than 28 days -> possible
+- Error code from a system call: can't access the current directory -> possible (lock, directory removed, permission error)
+  
+- In C++: a=2; b = 3; but (a+b) does not equal 5 -> possible
+- A triangle with an interior angle sum = 180° -> possible
+- A minute that doesn't have 60 seconds -> possible
+- (a+1) <= a -> possible
 
 ## How to balance resources
 
