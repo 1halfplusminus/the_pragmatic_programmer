@@ -210,6 +210,49 @@ Because Pragmatic Programmers trust no one, including ourselves, we feel that it
 At certain points in your code, the program logic will dictate that the resources will be in a certain state:
 use the wrappers to check this.
 
+### Dont't Outrun Your Headlights
 
+>  It's tough to make predictions, especially about the future.
 
-### Checking thebalance
+In software development, our "headlights" are similarly limited. 
+We can't see too far ahead into the future, and the further off-axis you look,
+the darker it gets. So pragmatic Programmers have a firm rule:
+
+### Take Small Steps -- Always
+
+Always take small, deliberate steps, checking for feedback and adjusting before proceeding.
+Consider that the rate of feedback is your speed limit.
+You never tkae on a step or a task that's "too big."
+
+What do we mean exactly by feedback? Anything that independently confirms or disproves your action
+For example:
+
+- Results in a REPL provide feedback on your understaning of APIs and algorithms
+- Unit tests provide feedback on your last code change
+- User demo and conversation provide feedback on features and usability
+
+What's a task that's too big ? Any task that requires "fortune telling" just as the car headlights have limited throw,
+we can only see into the future perhaps one or two steps, maybe a few hours or days at most. Beyond that, you quickly gets
+pas educated guess and into wild speculation
+
+You might find yourself slipping into fortune telling when you have to:
+
+- Estimate completion dates months in the future
+- Plan a design for future maintenance or extendability
+- Guess user's future needs
+- Guess future tech availiability
+
+Making code replaceable will also help with cohesion, coupling, decoupling, and DRY, leading to a better design overall.
+
+### Black Swans
+
+In his book , [The Black Swan: The impact of the Highly Improbable][].
+
+[The Black Swan: The impact of the Highly Improbable]:(https://www.amazon.fr/Black-Swan-Impact-Highly-Improbable/dp/0141034599)
+
+Nassim Nicholas Taleb posits that all significant events in history have come from high-profile,hard-to-predict, and rare events that are beyond the realm of normal expectations. These outliers, while statistically rare,
+have disproportionate effects. In addition, our own cognitive biases tend to blind us to changes creeping up on the edges of your work.
+
+### Avoid Fortune-Telling
+
+Much of the time, tomorrow looks a lot like today. But don't count on it.
