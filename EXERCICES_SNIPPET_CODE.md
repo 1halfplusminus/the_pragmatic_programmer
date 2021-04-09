@@ -256,3 +256,56 @@ have disproportionate effects. In addition, our own cognitive biases tend to bli
 ### Avoid Fortune-Telling
 
 Much of the time, tomorrow looks a lot like today. But don't count on it.
+
+## Bend, or Break
+
+The code that we write doesn't stand still. We need to make every effort to write code that's as loose -- as flexible -- as possible.
+
+Or we may find our code quickly becoming outdated, or too brittle to fix.
+
+## Decoupling
+
+Coupling is the enemy of change , it links together things that mus change in parallel.
+You're designing software that you'll want to change for it to be flexible, individual components should be coupled to as fex other components as possible.
+
+To make matters worse, coupling is transitive.
+
+This means there's a simple principle you should follow:
+
+### Decoupled Code Is Easier to Change
+
+The symptoms of coupling:
+
+- Wacky dependencies between unrelated modules or libraries.
+- "Simple" changes to one module that propagate through unrelated modules in the system or break stuff elsewhere in the system.
+- Developers who are afraid to change code because they aren't sure what might be affected.
+- Meetings where everyone has to attend because no one is sure who will be affected by a change.
+
+## Train Wrecks
+
+We've all seen (and probaly written) code like this:
+
+```java
+
+public void applyDiscount(customer,order_id,discount) {
+    totals = customer.orders.find(order_id).getTotals();
+    totals.grandTotal = totals.grandTotal - discount;
+    totals.discount = discount;
+}
+
+```
+
+This chunk of code is traversing five levels of abstraction, from customer to total amounts.
+That's a lot of implicit knowledge. But worse that's lot of thing that cannot change in the future.
+
+Let's imagine that the business decides that no order can have a discount of more than 40%.
+Where would we put the code that enforce that rule ?
+
+You might say it belongs in the applyDiscount function we just wrote.
+But with the code the way it is now. Any piece of code anywhere, could set fields in the totals object.
+
+One way to look at this is to think about responsibilities. Surely the totals object should be responsible for managing the totals. And yet it isn't.
+
+The fix for that is to apply something we call:
+
+### Tell, Don't Ask
