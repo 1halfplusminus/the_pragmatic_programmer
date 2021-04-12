@@ -309,3 +309,72 @@ One way to look at this is to think about responsibilities. Surely the totals ob
 The fix for that is to apply something we call:
 
 ### Tell, Don't Ask
+
+You shouldn't make decisions based on the internal state of an object and then update that object.
+Doing so destroys the benefits of encapsulation.
+
+Fixed example:
+
+```java
+
+public void applyDiscount(customer,order_id, discount) {
+    customer
+    .findOrder(order_id)
+    .applyDiscount(discount);
+}
+
+```
+
+TDA is not a law of nature; it's just a pattern to help us
+
+Here order is a part of customer API. So it's fine to expose it.
+
+## The Law of Demeter
+
+In the relation of coupling the Law Of Demete is a set of rule that in a class C should only call:
+
+1. Other instance methods in C
+2. Its parameters
+3. Methods in objects that it creates, both on the stack and in the heap
+4. Global variables
+
+The global variable should be removed.
+
+## Don't chain method Calls
+
+Try don't to do more than one "." when access something.
+
+Example:
+
+```ruby
+
+# This is pretty poor style
+
+# and so is This
+
+orders = customer.orders;
+last = orders.last();
+totals = last.totals();
+amount = totals.amount;
+
+```
+There only one exception thing that don't change a lot like language API
+
+```ruby
+
+people
+.sort_by(|person| person.age)
+.first(10)
+.map(| person | person.name)
+
+```
+
+## Avoid Global Data
+
+Global data includes singletons.
+Global Data Includes External Resources.
+
+If it's important Enough to Be Global. Wrap It in an API
+
+## Inheritance Adds Coupling
+
