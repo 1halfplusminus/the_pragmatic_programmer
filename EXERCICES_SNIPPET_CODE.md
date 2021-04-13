@@ -281,7 +281,7 @@ The symptoms of coupling:
 - Developers who are afraid to change code because they aren't sure what might be affected.
 - Meetings where everyone has to attend because no one is sure who will be affected by a change.
 
-## Train Wrecks
+### Train Wrecks
 
 We've all seen (and probaly written) code like this:
 
@@ -329,7 +329,7 @@ TDA is not a law of nature; it's just a pattern to help us
 
 Here order is a part of customer API. So it's fine to expose it.
 
-## The Law of Demeter
+### The Law of Demeter
 
 In the relation of coupling the Law Of Demete is a set of rule that in a class C should only call:
 
@@ -340,7 +340,7 @@ In the relation of coupling the Law Of Demete is a set of rule that in a class C
 
 The global variable should be removed.
 
-## Don't chain method Calls
+### Don't chain method Calls
 
 Try don't to do more than one "." when access something.
 
@@ -369,12 +369,72 @@ people
 
 ```
 
-## Avoid Global Data
+### Avoid Global Data
 
 Global data includes singletons.
 Global Data Includes External Resources.
 
 If it's important Enough to Be Global. Wrap It in an API
 
-## Inheritance Adds Coupling
+### Inheritance Adds Coupling
 
+The misuse of subclassing, where a class interits state and behaviour from another class. Add dangerous coupling
+
+### Again, It's All About Change
+
+Coupled code is had to change, Keeping your code shy will help keep your applications decoupled.
+
+## Juggling the Real World
+
+### Events
+
+An event represents the availability of information.
+If we write applications that respond to events adjust what they do based on those events, those applications will work better in the real world.
+
+Let's look at four strategies that help to build that type of application:
+
+1. Finite State Machines
+2. The observer Pattern
+3. Pusblish / Subscribe
+4. Reactive Programming and Streams
+   
+### Finite State Machine
+
+#### The Anatomy of a Pragmatic FSM
+
+A state machine is just a specification of how to handle events.
+It consists of a set of states, one of which is the current state.
+For each state , we list the events that are  significant to that state.
+For each of thos events, we define the new current state of the system.
+
+For example, we may receiving multipart messages from a web-socket.
+The first message is a header. This is followed by any number of data messages,
+followed by a trailing message
+
+
+The neat thing about SMS is that we can express them purely as data.
+Here's a table representing our message parser
+
+| State   |  Events |         |         |       |
+|---------|:-------:|:-------:|:-------:|:-----:|
+|         | Header  | Data    | Trailer | Other |
+| Initial | Reading | Error   | Error   | Error |
+| Reading | Error   | Reading | Done    | Error |
+
+Tehe code that handles its is equally simple:
+
+```ruby
+
+TRANSITIONS = {
+    initial: {header: :reading},
+    reading:{data: :reading, trailer: :done},
+}
+
+state = :inital
+
+while state != :done && state != :error
+    msg = get_next_message()
+    state = TRANSITIONS[state][msg.msg_type] || :error
+end
+
+```
