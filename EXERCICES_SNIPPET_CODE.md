@@ -412,7 +412,7 @@ The first message is a header. This is followed by any number of data messages,
 followed by a trailing message
 
 
-The neat thing about SMS is that we can express them purely as data.
+The neat thing about FMS is that we can express them purely as data.
 Here's a table representing our message parser
 
 | State   |  Events |         |         |       |
@@ -436,5 +436,37 @@ while state != :done && state != :error
     msg = get_next_message()
     state = TRANSITIONS[state][msg.msg_type] || :error
 end
+
+```
+
+### Adding Actions
+
+You can beef a FSM by adding actions that are triggered on certain transitions.
+
+For example, e might need to extract all of the strings in a source file. 
+A string is text between quotes, but a backslash in a string escapes the next character,
+so "ignore \"quotes\"" is a single string.
+
+[Example](./FSM_action.png)
+
+event/strings_fsm.rb
+```ruby
+
+TRANSITIONS = {
+    look_for_string: {
+        ''''=> [:in_string,:start_new_string],
+        :default => [:look_for_string, :ignore]
+    },
+
+    in_string: {
+        '''' => [:look_for_string, :finish_current_string],
+        '||' => [:copy_next_char, :add_current_to_string],
+        :default => [:in_string, :add_current_to_string],
+    ],
+
+    copy_next_char: {
+        :default => [:in_string, :add_current_to_string],
+    },
+}
 
 ```
