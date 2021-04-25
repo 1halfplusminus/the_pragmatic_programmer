@@ -148,7 +148,7 @@ one resource contains references to another.
 
 If you are programming in an object-oriented language, you may fnd it useful to encapsulate reources in classes. Each time you need a particular resource type, you instantiate an object of that class.
 When the object goes out of scope, or is reclaimed by the garbage collector, the object
-destructor then deallocates the wrapped resource. 
+destructor then deallocates the wrapped resource.
 
 ### Balancing and Exceptions
 
@@ -175,7 +175,7 @@ The finally clause will catch it, and try to deallocate a thing that was never a
 The correct pattern for handling resource deallocation in an environment with exceptions is
 
 thing = allocate_resource()
-begin 
+begin
     process(thing)
 finally
     deallocate(thing)
@@ -199,7 +199,6 @@ You have three main options:
 - The top-level structure is simply deallocated. Any structures that it pointed to (that are not referenced elsewhere) are orphaned.
 - the top-level structure refuses to deallocate itself if it contains any substructures.
 
-
 The choice here depends on the circumstances of each individual data structure.
 Our preference in these circumstances is to write a module for each major structure that provides standard allocation and deallocation facilities for that strcture. (This module can alswo provide facilities such as debug printng, serialization, deserialization and traversal hooks)
 
@@ -212,9 +211,9 @@ use the wrappers to check this.
 
 ### Dont't Outrun Your Headlights
 
->  It's tough to make predictions, especially about the future.
+> It's tough to make predictions, especially about the future.
 
-In software development, our "headlights" are similarly limited. 
+In software development, our "headlights" are similarly limited.
 We can't see too far ahead into the future, and the further off-axis you look,
 the darker it gets. So pragmatic Programmers have a firm rule:
 
@@ -358,6 +357,7 @@ totals = last.totals();
 amount = totals.amount;
 
 ```
+
 There only one exception thing that don't change a lot like language API
 
 ```ruby
@@ -397,7 +397,7 @@ Let's look at four strategies that help to build that type of application:
 2. The observer Pattern
 3. Pusblish / Subscribe
 4. Reactive Programming and Streams
-   
+
 ### Finite State Machine
 
 #### The Anatomy of a Pragmatic FSM
@@ -410,7 +410,6 @@ For each of thos events, we define the new current state of the system.
 For example, we may receiving multipart messages from a web-socket.
 The first message is a header. This is followed by any number of data messages,
 followed by a trailing message
-
 
 The neat thing about FMS is that we can express them purely as data.
 Here's a table representing our message parser
@@ -443,13 +442,14 @@ end
 
 You can beef a FSM by adding actions that are triggered on certain transitions.
 
-For example, e might need to extract all of the strings in a source file. 
+For example, we might need to extract all of the strings in a source file.
 A string is text between quotes, but a backslash in a string escapes the next character,
 so "ignore \"quotes\"" is a single string.
 
 [Example](./FSM_action.png)
 
 event/strings_fsm.rb
+
 ```ruby
 
 TRANSITIONS = {
@@ -460,7 +460,7 @@ TRANSITIONS = {
 
     in_string: {
         '''' => [:look_for_string, :finish_current_string],
-        '||' => [:copy_next_char, :add_current_to_string],
+        '\\' => [:copy_next_char, :add_current_to_string],
         :default => [:in_string, :add_current_to_string],
     ],
 
@@ -470,3 +470,37 @@ TRANSITIONS = {
 }
 
 ```
+
+event/strings.fsm.ruby
+
+```ruby
+
+state = :look_for_string
+result = []
+
+while ch = STDIN.getc
+state, action = TRANSITIONS[state][ch] || TRANSITIONS[state][:default]
+case action
+when :ignore
+when :start_new_string
+result = []
+when :add_current_to_string
+result << ch
+when :finish_current_string
+puts. result.join
+end
+end
+
+
+```
+
+In this example the result of each transition is both a new state and action.
+
+### The Observer pattern
+
+In the observable pattern we have a source of events, called the observable and a list of clients, the observers, who are listening for those events.
+
+An observer registers its interest with the observable, typically by passing a reference to a function to be called.
+
+[Example](./examples/event/observer.rb)
+

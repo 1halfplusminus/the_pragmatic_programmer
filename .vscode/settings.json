@@ -1,0 +1,7 @@
+{
+    "ruby.format": "rubocop",
+    "ruby.useLanguageServer": true,
+    "[ruby]": {
+        "editor.formatOnSave": true
+    }
+}
