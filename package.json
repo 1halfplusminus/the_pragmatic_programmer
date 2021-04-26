@@ -1,0 +1,27 @@
+{
+  "type": "module",
+  "dependencies": {
+    "rxjs": "^6.6.7",
+    "rxjs-compat": "^6.6.7",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "name": "the_pragmatic_programmer",
+  "version": "1.0.0",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1halfplusminus/the_pragmatic_programmer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1halfplusminus/the_pragmatic_programmer/issues"
+  },
+  "homepage": "https://github.com/1halfplusminus/the_pragmatic_programmer#readme",
+  "description": ""
+}

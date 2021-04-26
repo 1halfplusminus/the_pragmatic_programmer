@@ -504,3 +504,29 @@ An observer registers its interest with the observable, typically by passing a r
 
 [Example](./examples/event/observer.rb)
 
+### Publish/Subscribe
+
+Publish/Subscribe (pubsub) generalizes the observer pattern , at the time solving the problems of coupling and performance.
+In the pubsub model, we have publishers and subscribers.
+They are connected via channels. The channels are implemented in seprate body of code: sometimes a library, sometimes a process, and sometimes a
+distributed infrastructure.
+
+Communication between the publisher and subcriber is handled outise your code, and is potentially asynchronous.
+
+The downside is that it can be hard to see what is going on in system that uses pubsub heavily.
+
+Compared to the observer pattern, pubsub is a great example of reducing coupling by abstracting up through a shared interface (the channel)
+
+### Reactive Programming, Streams, and Events
+
+[Example](./examples/event/rx1/index.js)
+
+#### Streaùs of events are asynchronous Collections
+
+Event streams unify synchronous and asynchronous processing behind a common convenient API. This
+
+### Events Are Ubiquitous
+
+Events are everywhere. Some are obvious: a button click, a timer expiring.
+Other are less so: someone logging in, a line in a file matching a pattern. But whatever their source, code that's crafted around events can be more responsive and better dcoupled than its more linear counterpart.
+
