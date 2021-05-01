@@ -446,7 +446,7 @@ For example, we might need to extract all of the strings in a source file.
 A string is text between quotes, but a backslash in a string escapes the next character,
 so "ignore \"quotes\"" is a single string.
 
-[Example](./FSM_action.png)
+![alt](./FSM_action.png)
 
 event/strings_fsm.rb
 
@@ -542,4 +542,4 @@ It will probaly do something like this:
     find . -type f | xargs wc -l | sort -n | tail -5
 ```
 
-<img src="./find_pipeline.svg" />
+![alt](./find_pipeline.svg)
