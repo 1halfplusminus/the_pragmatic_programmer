@@ -3,5 +3,9 @@
     "ruby.useLanguageServer": true,
     "[ruby]": {
         "editor.formatOnSave": true
+    },
+    "markdownlint.config": {
+        "default": true,
+        "MD033": { "allowed_elements": ["img"] }
     }
 }

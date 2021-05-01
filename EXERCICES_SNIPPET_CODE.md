@@ -530,3 +530,16 @@ Event streams unify synchronous and asynchronous processing behind a common conv
 Events are everywhere. Some are obvious: a button click, a timer expiring.
 Other are less so: someone logging in, a line in a file matching a pattern. But whatever their source, code that's crafted around events can be more responsive and better dcoupled than its more linear counterpart.
 
+## Transforming
+
+All prgrams transform data, converting an input into an output. And yet when we think about design, we rarely think about creating transformations.
+Instead we worry about classes and modules, data structures and algorithms, languages and frameworks.
+
+IF we ask a unix programmer to write us a program that lists the five longest files in a directory, where longest means "having the largest number of lines."
+It will probaly do something like this:
+
+```sh
+    find . -type f | xargs wc -l | sort -n | tail -5
+```
+
+<img src="./find_pipeline.svg" />
