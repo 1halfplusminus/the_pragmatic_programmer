@@ -542,4 +542,26 @@ It will probaly do something like this:
     find . -type f | xargs wc -l | sort -n | tail -5
 ```
 
-![alt](./find_pipeline.svg)
+![The find pipeline as a series of transformations](./find_pipeline.svg)
+
+Our original requirement, "top 5 files in terms of lines" becomes a series of transformations:
+
+directory name
+- list of files
+- list with line numbers
+- sorted list
+- highest five + total
+- highest five
+  
+Like an industrial assembly line: feed raw data in one end and the finished product (information) comes out the other.
+
+Code should be through the same way.
+
+> Programming Is About Code, But Programs Are About Data
+
+Finding Transformations
+
+TThe easiest way to find the transformations is to start with the requirement and determine its inputs and ouputs.
+
+This approach is called top-down.
+
