@@ -565,3 +565,36 @@ TThe easiest way to find the transformations is to start with the requirement an
 
 This approach is called top-down.
 
+Example with a website for folks playing word games that finds all the the words that can be made from a set of letters.
+
+Input: Set of letters , Output: List of three-letter words, four-letter words and so on:
+
+3 => ivy,lin,nil,yin
+
+Lvying is transformed to 4 => inly,liny,viny
+5 => vinyl
+
+The trick for the application is to have a dictionary which groups words by a signature, chosen so that all words containing the same letters will have the same signature.
+
+| Step    | Transformation                                                  | Sample data                                                           |
+|---------|-----------------------------------------------------------------|-----------------------------------------------------------------------|
+| Step O: | Initial input                                                   | ylvin                                                                 |
+| Step 1: | All combinations of the tyhree or more letters                  | vin,viy,vil,vny,vnl,iny,inl,iyl,nyl,viny,vinl,viyl,vnyl,inyl,vinyl    |
+| Step 2: | Signatures of the combinations                                  | inv,ivy,ilv,nvy,lnv,lvy,iny,iln,ily,lny,mvy,ilnv,ilvy,lnvy,ilny,ilnvy |
+| Step 3: | List of all dictionnary words which march any of the signatures | ivy,yin,nil,lin,viny,liny,inly,vinyl                                  |
+| Step 4: | Words grouped by length                                         | 3 => ivy, lin, nil, yin 4 => inly, liny, viny 5 => vinyl              |
+
+Transformations All the Way Down
+
+Every step in the first table can be breaken down futher
+
+| Step 1.0  | Transformation                          | Sample data                                                                            |
+|-----------|-----------------------------------------|----------------------------------------------------------------------------------------|
+| Step O:   | Initial input                           | vinyl                                                                                  |
+| Step 1.1: | Convert to characters                   | v,i,n,y,l                                                                              |
+| Step 1.2: | Get all subsets                         | [],[v],[i] ... [v,i],[v,n],[v,y]...[v,i,n],[v,i,y] ... [v,n,y,l],[i,n,y,l],[v,i,n,y,l] |
+| Step 1.3: | Only those longer than three characters | [v,i,n],[v,i,y],...[i,n,y,l],[v,i,n,y,l]                                               |
+| Step 1.4: | Words grouped by length                 | 3 => ivy, lin, nil, yin 4 => inly, liny, viny 5 => vinyl                               |
+
+With that we can now implement each transformations
+
