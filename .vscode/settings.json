@@ -1,11 +1,12 @@
 {
-    "ruby.format": "rubocop",
-    "ruby.useLanguageServer": true,
-    "[ruby]": {
-        "editor.formatOnSave": true
-    },
-    "markdownlint.config": {
-        "default": true,
-        "MD033": { "allowed_elements": ["img"] }
-    }
+  "ruby.format": "rubocop",
+  "ruby.useLanguageServer": true,
+  "[ruby]": {
+    "editor.formatOnSave": true
+  },
+  "markdownlint.config": {
+    "default": true,
+    "MD033": { "allowed_elements": ["img"] }
+  },
+  "editor.formatOnSave": true
 }
