@@ -1,4 +1,4 @@
-import { groupBy, mapValues, toArray, flattenDepth, first } from "lodash/fp";
+import { groupBy, filter } from "lodash/fp";
 import pipe from "lodash/fp/pipe";
 
 const codepoints = (string: String) => {
@@ -10,16 +10,12 @@ const subsets = <T>(theArray: T[]) =>
       subsets.concat(subsets.map((set) => [value, ...set])),
     [[]]
   );
-const longerThanThree = <T>(array: T[][]) => array.filter((t) => t.length > 3);
+const longerThan = <T>(length: number) =>
+  pipe(filter((v: T[]) => v.length > length));
+
 const groupByLength = <T>(array: T[][]) => groupBy("length", array);
-const allCodepoints = pipe(mapValues(codepoints), toArray);
-const allSubsets = pipe(mapValues(subsets), toArray, first);
 
-export const all_subset_longer_than_tree = pipe(
-  allCodepoints,
-  allSubsets,
-  longerThanThree,
-  groupByLength
-);
+export const all_subset_longer_than = (length: number) =>
+  pipe(codepoints, subsets, longerThan(length), groupByLength);
 
-console.log(all_subset_longer_than_tree(["vinyl"]));
+console.log(all_subset_longer_than(3)("vinyl"));
