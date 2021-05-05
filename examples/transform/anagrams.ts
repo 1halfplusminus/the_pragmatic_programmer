@@ -15,11 +15,11 @@ const groupByLength = <T>(array: T[][]) => groupBy("length", array);
 const allCodepoints = pipe(mapValues(codepoints), toArray);
 const allSubsets = pipe(mapValues(subsets), toArray, first);
 
-const result = pipe(
+export const all_subset_longer_than_tree = pipe(
   allCodepoints,
   allSubsets,
   longerThanThree,
   groupByLength
-)(["vinyl"]);
+);
 
-console.log(result);
+console.log(all_subset_longer_than_tree(["vinyl"]));

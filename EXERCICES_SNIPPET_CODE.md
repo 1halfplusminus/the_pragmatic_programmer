@@ -1,4 +1,3 @@
-
 # PRAGMATIC PROGRAMMER
 
 ## Assertive Programming
@@ -53,7 +52,6 @@ Which of the "impossible" things can happen ?
 
 - A month with fewer than 28 days -> possible
 - Error code from a system call: can't access the current directory -> possible (lock, directory removed, permission error)
-  
 - In C++: a=2; b = 3; but (a+b) does not equal 5 -> possible
 - A triangle with an interior angle sum = 180° -> possible
 - A minute that doesn't have 60 seconds -> possible
@@ -140,9 +138,9 @@ For anything that you create that takes up a finite resource, consider how to ba
 The basic pattern for resource allocation can be extended for routines that need more than one resource at time.
 
 - Deallocate resources in the opposite order to that in which you allocate them. That way you won't orphan resources if
-one resource contains references to another.
+  one resource contains references to another.
 - When allocating the same set of resources in different places in your code, always allocate them in the same order.
- This will reduce the possibility of deadlock.
+  This will reduce the possibility of deadlock.
 
 ### Object and Exception
 
@@ -164,10 +162,10 @@ You generally have two choices:
 We commonly see folks writing something like this:
 
 begin
-    thing = allocate_resource()
-    process(thing)
+thing = allocate_resource()
+process(thing)
 finally
-    deallocate(thing)
+deallocate(thing)
 
 What happens if resource allocation fails and raises an exception ?
 The finally clause will catch it, and try to deallocate a thing that was never allocated.
@@ -176,9 +174,9 @@ The correct pattern for handling resource deallocation in an environment with ex
 
 thing = allocate_resource()
 begin
-    process(thing)
+process(thing)
 finally
-    deallocate(thing)
+deallocate(thing)
 end
 
 ### When You Can't Balance Resources
@@ -247,7 +245,7 @@ Making code replaceable will also help with cohesion, coupling, decoupling, and 
 
 In his book , [The Black Swan: The impact of the Highly Improbable][].
 
-[The Black Swan: The impact of the Highly Improbable]:(https://www.amazon.fr/Black-Swan-Impact-Highly-Improbable/dp/0141034599)
+[the black swan: the impact of the highly improbable]: (https://www.amazon.fr/Black-Swan-Impact-Highly-Improbable/dp/0141034599)
 
 Nassim Nicholas Taleb posits that all significant events in history have come from high-profile,hard-to-predict, and rare events that are beyond the realm of normal expectations. These outliers, while statistically rare,
 have disproportionate effects. In addition, our own cognitive biases tend to blind us to changes creeping up on the edges of your work.
@@ -404,7 +402,7 @@ Let's look at four strategies that help to build that type of application:
 
 A state machine is just a specification of how to handle events.
 It consists of a set of states, one of which is the current state.
-For each state , we list the events that are  significant to that state.
+For each state , we list the events that are significant to that state.
 For each of thos events, we define the new current state of the system.
 
 For example, we may receiving multipart messages from a web-socket.
@@ -414,11 +412,11 @@ followed by a trailing message
 The neat thing about FMS is that we can express them purely as data.
 Here's a table representing our message parser
 
-| State   |  Events |         |         |       |
-|---------|:-------:|:-------:|:-------:|:-----:|
-|         | Header  | Data    | Trailer | Other |
-| Initial | Reading | Error   | Error   | Error |
-| Reading | Error   | Reading | Done    | Error |
+| State   | Events  |         |         |       |
+| ------- | :-----: | :-----: | :-----: | :---: |
+|         | Header  |  Data   | Trailer | Other |
+| Initial | Reading |  Error  |  Error  | Error |
+| Reading |  Error  | Reading |  Done   | Error |
 
 Tehe code that handles its is equally simple:
 
@@ -547,12 +545,13 @@ It will probaly do something like this:
 Our original requirement, "top 5 files in terms of lines" becomes a series of transformations:
 
 directory name
+
 - list of files
 - list with line numbers
 - sorted list
 - highest five + total
 - highest five
-  
+
 Like an industrial assembly line: feed raw data in one end and the finished product (information) comes out the other.
 
 Code should be through the same way.
@@ -577,7 +576,7 @@ Lvying is transformed to 4 => inly,liny,viny
 The trick for the application is to have a dictionary which groups words by a signature, chosen so that all words containing the same letters will have the same signature.
 
 | Step    | Transformation                                                  | Sample data                                                           |
-|---------|-----------------------------------------------------------------|-----------------------------------------------------------------------|
+| ------- | --------------------------------------------------------------- | --------------------------------------------------------------------- |
 | Step O: | Initial input                                                   | ylvin                                                                 |
 | Step 1: | All combinations of the tyhree or more letters                  | vin,viy,vil,vny,vnl,iny,inl,iyl,nyl,viny,vinl,viyl,vnyl,inyl,vinyl    |
 | Step 2: | Signatures of the combinations                                  | inv,ivy,ilv,nvy,lnv,lvy,iny,iln,ily,lny,mvy,ilnv,ilvy,lnvy,ilny,ilnvy |
@@ -589,7 +588,7 @@ Transformations All the Way Down
 Every step in the first table can be breaken down futher
 
 | Step 1.0  | Transformation                          | Sample data                                                                            |
-|-----------|-----------------------------------------|----------------------------------------------------------------------------------------|
+| --------- | --------------------------------------- | -------------------------------------------------------------------------------------- |
 | Step O:   | Initial input                           | vinyl                                                                                  |
 | Step 1.1: | Convert to characters                   | v,i,n,y,l                                                                              |
 | Step 1.2: | Get all subsets                         | [],[v],[i] ... [v,i],[v,n],[v,y]...[v,i,n],[v,i,y] ... [v,n,y,l],[i,n,y,l],[v,i,n,y,l] |
@@ -598,3 +597,4 @@ Every step in the first table can be breaken down futher
 
 With that we can now implement each transformations
 
+[Anagrams](./examples/transform/anagrams.ts)
