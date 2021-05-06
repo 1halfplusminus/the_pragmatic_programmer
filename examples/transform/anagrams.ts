@@ -1,4 +1,13 @@
-import { groupBy, filter } from "lodash/fp";
+import {
+  groupBy,
+  filter,
+  mapValues,
+  toArray,
+  uniq,
+  union,
+  uniqBy,
+  isEqual,
+} from "lodash/fp";
 import pipe from "lodash/fp/pipe";
 
 const codepoints = (string: String) => {
@@ -15,7 +24,17 @@ const longerThan = <T>(length: number) =>
 
 const groupByLength = <T>(array: T[][]) => groupBy("length", array);
 
-export const all_subset_longer_than = (length: number) =>
-  pipe(codepoints, subsets, longerThan(length), groupByLength);
+const sortAlphabets = function (charsOrString: String[] | String) {
+  const chars =
+    charsOrString instanceof String ? charsOrString.split("") : charsOrString;
+  return chars.sort().join("");
+};
 
-console.log(all_subset_longer_than(3)("vinyl"));
+const asSignature = pipe(mapValues(sortAlphabets), toArray, uniq);
+
+export const all_subset_longer_than = (length: number) =>
+  pipe(codepoints, subsets, longerThan(length));
+
+console.log(
+  pipe(all_subset_longer_than(3), asSignature, groupByLength)("vinyl")
+);
