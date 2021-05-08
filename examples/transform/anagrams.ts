@@ -6,8 +6,8 @@ import {
   uniq,
   indexBy,
   join,
+  pipe,
 } from "lodash/fp";
-import pipe from "lodash/fp/pipe";
 
 type Dictionary = { [key: string]: string };
 
