@@ -8,13 +8,31 @@ import {
   join,
   pipe,
   truncate,
+  isEmpty,
 } from "lodash/fp";
 import { readFileSync } from "fs";
+type GenericFunction = <T>(x: T) => T;
 
 type Dictionary = { [key: string]: string };
 type ResultOk<T> = ["ok", T];
-
 type ResultError<T> = ["error", T];
+
+function ok<T>(result: T) {
+  return ["ok", result] as ResultOk<T>;
+}
+function error<T>(reason: T) {
+  return ["error", reason] as ResultError<T>;
+}
+
+const unless_ok = <T, G, H>(callback: H) => (
+  test: ResultOk<T> | ResultError<G>
+) => {
+  if (test[0] === "ok") {
+    return callback(test[1]);
+  } else {
+    return test;
+  }
+};
 module File {
   export function open(path: string) {
     try {
@@ -26,34 +44,35 @@ module File {
   }
 }
 
+function ok_unless_empty<T>(result: T | null) {
+  if (isEmpty(result)) {
+    return ok(result);
+  }
+  return error("nothing found" as const);
+}
+
 function find_matching_lines(pattern: string) {
-  return (content: ResultOk<Buffer> | ResultError<any>) => {
-    if (content[0] == "ok") {
-      return pipe(
-        (r: Buffer) => {
-          return r.toString().split("/n");
-        },
-        filter((s: string) => s.includes(pattern))
-      )(content[1]);
-    } else {
-      return ["error", content[1]];
-    }
+  return (content: Buffer) => {
+    return pipe(
+      (r: Buffer) => {
+        return r.toString().split("/n");
+      },
+      filter((s: string) => s.includes(pattern)),
+      ok
+    )(content);
   };
 }
 
-function truncate_lines(content: ResultOk<string[]> | ResultError<any>) {
-  if (content[0] == "ok") {
-    return pipe(mapValues(truncate({ length: 20 })), toArray)(content[1]);
-  } else {
-    return ["error", content[1]];
-  }
+function truncate_lines(content: string[]) {
+  return pipe(mapValues(truncate({ length: 20 })), toArray, ok)(content);
 }
+const test = unless_ok(() => find_matching_lines("test")(Buffer.from("aaaaa")));
 
 function find_all(fileName: string, pattern: string) {
   return pipe(
     File.open,
-    find_matching_lines(pattern),
-    truncate_lines
+    unless_ok(find_matching_lines(pattern)),
+    unless_ok(truncate_lines)
   )(fileName);
 }
 
@@ -116,4 +135,4 @@ export const anagrams_in = (word: string) =>
     groupByLength
   )(word);
 
-console.log(anagrams_in("vinyl"));
+console.log();
