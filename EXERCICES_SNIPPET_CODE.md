@@ -598,3 +598,62 @@ Every step in the first table can be breaken down futher
 With that we can now implement each transformations
 
 [Anagrams](./examples/transform/anagrams.ts)
+
+### Transformations Transform Programming
+
+Thinking of code as a series of transformations can be liberating approach to programming.
+
+// TODO: Exercise 21
+// TODO: Exercise 22
+// TODO: Exercise 23
+
+## Inheritance Tax
+
+### Problems Using Inheritance to Share Code
+
+Inheritance is coupling. The child class is coupled to the parent and the code that use the child is coupled to all ancestors.
+
+// TODO: Exercise in javascript
+
+```ruby
+
+class Vehicle
+
+def initialize
+@speed = 0
+end
+
+def stop
+@speed = 0
+end
+
+def move_at(speed)
+@speed = speed
+end
+
+class Car < Vehicle
+
+def info
+"I'm car driving at #{@speed}"
+end
+
+end
+
+# top-level code
+
+my_ride = Car.new
+my_ride.move_at(30)
+
+```
+
+In this example its the vehicle method of move_at that is called.
+Now if the API of vehicle change and move_at became set_velocity and the instance variable @speed becomes @velocity.
+The child class will break.
+
+An API change is expected to break clients of Vehicle class. But the top-level is not: as far as it is concerned it is using a Car.
+What hte Car class does in terms of implementation is not the concern of the top-level code, but it still breaks.
+
+Similarly the name of an instance variable is purely an internal implementation detail, but when Vehicle changes it also (silently) breaks Car.
+So much coupling.
+
+### Problems using inheritance to Build Types

@@ -46,6 +46,7 @@ module File {
 
 function find_matching_lines(pattern: string) {
   return (content: Buffer) => {
+    console.log("never called");
     return pipe(
       (r: Buffer) => {
         return r.toString().split("\n");
