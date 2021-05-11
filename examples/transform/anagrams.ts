@@ -9,71 +9,73 @@ import {
   pipe,
   truncate,
   isEmpty,
+  result,
+  flatMap,
 } from "lodash/fp";
 import { readFileSync } from "fs";
-type GenericFunction = <T>(x: T) => T;
+import { left, right, map, chain, flatten, tryCatch } from "fp-ts/Either";
+import * as io from "fp-ts/IOEither";
+import * as r from "fp-ts/ReaderEither";
+import { pipe as pipeFP } from "fp-ts/function";
+import { resolve } from "path";
+import { mapLeft } from "fp-ts/Either";
+import { fromEither } from ".pnpm/fp-ts@2.10.5/node_modules/fp-ts/lib/OptionT";
 
 type Dictionary = { [key: string]: string };
-type ResultOk<T> = ["ok", T];
-type ResultError<T> = ["error", T];
 
 function ok<T>(result: T) {
-  return ["ok", result] as ResultOk<T>;
+  return right(result);
 }
 function error<T>(reason: T) {
-  return ["error", reason] as ResultError<T>;
+  return left(reason);
 }
 
-const unless_ok = <T, G, H>(callback: H) => (
-  test: ResultOk<T> | ResultError<G>
-) => {
-  if (test[0] === "ok") {
-    return callback(test[1]);
-  } else {
-    return test;
-  }
-};
 module File {
   export function open(path: string) {
-    try {
-      const result = readFileSync("./test");
-      return ["ok", result] as ResultOk<Buffer>;
-    } catch (e) {
-      return ["error", e.message] as ResultError<string>;
-    }
+    return io.tryCatch(
+      () => {
+        const result = readFileSync(path);
+        return result;
+      },
+      (e) => {
+        return new Error(String(e));
+      }
+    );
   }
-}
-
-function ok_unless_empty<T>(result: T | null) {
-  if (isEmpty(result)) {
-    return ok(result);
-  }
-  return error("nothing found" as const);
 }
 
 function find_matching_lines(pattern: string) {
   return (content: Buffer) => {
     return pipe(
       (r: Buffer) => {
-        return r.toString().split("/n");
+        return r.toString().split("\n");
       },
-      filter((s: string) => s.includes(pattern)),
-      ok
+      filter((s: string) => s.includes(pattern))
     )(content);
   };
 }
 
 function truncate_lines(content: string[]) {
-  return pipe(mapValues(truncate({ length: 20 })), toArray, ok)(content);
+  return pipeFP(content, mapValues(truncate({ length: 20 })), (d) =>
+    toArray(d)
+  );
 }
-const test = unless_ok(() => find_matching_lines("test")(Buffer.from("aaaaa")));
 
+function unless_empty(result: string[]) {
+  if (result.length > 0) {
+    return ok(result);
+  }
+  return error(new Error("nothing found"));
+}
 function find_all(fileName: string, pattern: string) {
-  return pipe(
+  return pipeFP(
+    fileName,
     File.open,
-    unless_ok(find_matching_lines(pattern)),
-    unless_ok(truncate_lines)
-  )(fileName);
+    io.map((b) => find_matching_lines(pattern)(b)),
+    io.map((l) => truncate_lines(l)),
+    io.chain((e) => io.fromEither(unless_empty(e))),
+    io.mapLeft((e) => e.message)
+  )();
 }
 
 function generate(words: string[]): Dictionary {
@@ -135,4 +137,4 @@ export const anagrams_in = (word: string) =>
     groupByLength
   )(word);
 
-console.log();
+console.log(find_all(resolve(__dirname, "./test.txt"), "a"));

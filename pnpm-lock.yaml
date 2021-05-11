@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@types/lodash': ^4.14.168
   '@types/node': ^15.0.2
+  fp-ts: ^2.10.5
   inquirer: ^8.0.0
   lodash: ^4.17.21
   rxjs: ^6.6.7
@@ -14,6 +15,7 @@ specifiers:
 dependencies:
   '@types/lodash': 4.14.168
   '@types/node': 15.0.2
+  fp-ts: 2.10.5
   inquirer: 8.0.0
   lodash: 4.17.21
   rxjs: 6.6.7
@@ -126,6 +128,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       escape-string-regexp: 1.0.5
+    dev: false
+
+  /fp-ts/2.10.5:
+    resolution: {integrity: sha512-X2KfTIV0cxIk3d7/2Pvp/pxL/xr2MV1WooyEzKtTWYSc1+52VF4YzjBTXqeOlSiZsPCxIBpDGfT9Dyo7WEY0DQ==}
     dev: false
 
   /has-flag/4.0.0:
