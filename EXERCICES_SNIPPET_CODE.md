@@ -657,3 +657,54 @@ Similarly the name of an instance variable is purely an internal implementation 
 So much coupling.
 
 ### Problems using inheritance to Build Types
+
+inhereritance shouldn't be a way of defining new types.
+Their favorite design diagram shows class hierarchies.
+
+These hierachies soon grow into wall-covering monstrosities, layer-upon-layer added in order to express the smallest nuance of
+differentiation between classes.
+
+This added complexity can make the application more brittle, as changes can ripple up and down many layers.
+
+Don't Pay Inheritane Tax
+
+### The Alternative Are Better
+
+Three techniques that mean you should never need to use inheritance again:
+
+1. Interfaces and Protocols
+2. Delegation
+3. Mixins and traits
+
+### Interfaces and Protocols
+
+Most OO languages allow you to specify that class implements one or more sets ofe behaviors.
+
+Example with Car: Car class implements Drivable and Locatable behavior.
+
+What makes interfaces and protocols so powerful is that we can use them as types.
+
+Interfaces and protocols give us polymorphism without inheritance.
+
+### Delegation
+
+Preferer delegation over inheritance:
+
+```ruby
+
+// BAD
+class Account < PersistenceBaseClass
+end
+
+// GOOD
+class Account
+def initialize(...)
+@repo = Persister.for(self)
+end
+
+def save
+@repo.save()
+end
+end
+
+```
