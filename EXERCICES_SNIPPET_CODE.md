@@ -708,3 +708,71 @@ end
 end
 
 ```
+
+Now that we're no longer constrained by the API of the framework we're using, we're free to create the API we need.
+
+Delegate to Services Has-A Trumps Is-A
+
+```ruby
+
+class Account
+# nothing but account stuff
+end
+
+class AccountRecord
+# wraps an account with the ability
+# to be fetched and stored
+end
+
+```
+
+Now the code is decoupled but at the cost of having to write more code, and typically some of it will be boilterplate.
+It's likely that all our record classes will need a find method. That what mixins and traits do for us.
+
+Mixins, Traits, Categories,Protocols extensions, ...
+
+Mixin give the ability to extend classes and object with new functionality without using inheritance.
+
+Example mixin for common persistence methods:
+
+```ruby
+
+mixin CommonFinders {
+    def find(id){...}
+    def findAll() {...}
+end
+}
+
+```
+
+As an example, let's go back to our AccountRecord example. As we letf it, an AccountRecord needed to know about both accounts and about our persistence framework. It also needed to deleagte all the methods in the persistence layer that it wanted to expose to the outside world.
+
+Mixins give us an alterantive. Write the standard method in the mixin and add them into AccountRecord
+
+```ruby
+
+mixin CommonFinders {
+    def find(id) {...}
+    def findAll() { ... }
+end
+
+}
+
+class AccountRecord extends BasicRecord with CommonFinders
+class OrderRecord extends BasicRecord with CommonFinders
+
+```
+
+Example with validation:
+
+```ruby
+
+class AccounForCustomer extends Account with AccountValidations,AccountCustomerValidations
+
+class AccountForAdmin extends Account with AccountValidations,AccountAdminValidations
+
+```
+
+Use mixins to Share Functionality
+
+Inheritance Is Rarely the Answer
