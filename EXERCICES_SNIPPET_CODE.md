@@ -776,3 +776,30 @@ class AccountForAdmin extends Account with AccountValidations,AccountAdminValida
 Use mixins to Share Functionality
 
 Inheritance Is Rarely the Answer
+
+### Configuration
+
+Values that may change after the application has gone live, or value specifique to customers should be keep outside of the app.
+
+Parameterize Your App Using External Configuration.
+
+### Configuration As Service
+
+Configuration can also be stored behind a service API. This has a number of benefits:
+
+- Multiple applications can share configuration information, with authentification and access control limiting what each can see.
+- Configuration changes can be made globally.
+- The confgiuration data can be maintained via a specialized UI.
+
+### Don't Write Dodo-Code
+
+### Don't Overdo It
+
+Don't Overdo it and Don't push decisions to configuration out of laziness.
+
+## Concurrency
+
+Concurrency is when the execution of two or more pieces of code act as if they run at the same time.
+Parallelism is when they do run at the same time.
+
+To have concurrency, you need to run code in environment that can switch execution between different parts of your code when it is running. This is often implemented using thins such as fibers, threads, processes.
