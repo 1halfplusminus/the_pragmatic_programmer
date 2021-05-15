@@ -803,3 +803,47 @@ Concurrency is when the execution of two or more pieces of code act as if they r
 Parallelism is when they do run at the same time.
 
 To have concurrency, you need to run code in environment that can switch execution between different parts of your code when it is running. This is often implemented using thins such as fibers, threads, processes.
+
+The biggest difficulty with concurrency is shared state. This doesn't just mean global variables: any time two or more chunks of code hold references to the same piece of mutable data, you have shared state.
+
+There is workarounds for this but ultimately they're all error prone.
+
+### Breaking Temporal Coupling
+
+There are two aspects of time that are important to us: concurrency and ordering.
+When people first sit down to design an architecture or write a program, things lend to be linear.
+That's the way most people think do this and then always do that.
+But thinking this way leads to temporal coupling: coupling in time.
+
+This approach is not very flexible , and not very realistic.
+
+We nned to allow for concurrency and to think about decoupling any time or order dependencies. In doing so
+we gain flexibility and reduce any time based dependencies in many area of development:
+workflow analysis, architecture, design , and deployment.
+
+### Looking for Concurrency
+
+#### Analyse workflow to Improve Concurrency Using Activity Diagram
+
+An activity diagram consists of a set of actions drawn as rounded boxes. TheThe arrow leaving an action leads to either
+another action (which can start once the first action completes) or a thick line called a synchronization bar.
+When actions leading to a synchronization bar is finis, you can proceed along any arroww leaving the bar.
+An action without arrow can be started any time.
+
+Activity Diagrams can be used to identifying process that could be perform in parallel but aren't.
+
+Example with robotic pina colada marker:
+
+1. open blender
+2. open pina colada mix
+3. put mix in blender
+4. measure 1/2 cup white rum
+5. Pour in rum
+6. Add 2 cups of ice
+
+7. Close blender
+8. Liquefy for 1 minute
+9. Open blender
+10. Get glasses
+11. Get pink umbrellas
+12. Serve
