@@ -8,18 +8,12 @@ import {
   join,
   pipe,
   truncate,
-  isEmpty,
-  result,
-  flatMap,
 } from "lodash/fp";
 import { readFileSync } from "fs";
-import { left, right, map, chain, flatten, tryCatch } from "fp-ts/Either";
+import { left, right } from "fp-ts/Either";
 import * as io from "fp-ts/IOEither";
-import * as r from "fp-ts/ReaderEither";
 import { pipe as pipeFP } from "fp-ts/function";
 import { resolve } from "path";
-import { mapLeft } from "fp-ts/Either";
-import { fromEither } from ".pnpm/fp-ts@2.10.5/node_modules/fp-ts/lib/OptionT";
 
 type Dictionary = { [key: string]: string };
 
