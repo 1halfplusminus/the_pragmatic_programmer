@@ -847,3 +847,9 @@ Example with robotic pina colada marker:
 10. Get glasses
 11. Get pink umbrellas
 12. Serve
+
+Even though these actions are describe serially, many of them could be performed in parallel.
+
+![alt](./activity.svg)
+
+Activity diagram show the potential areas of concurrency
