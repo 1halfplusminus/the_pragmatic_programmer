@@ -853,3 +853,29 @@ Even though these actions are describe serially, many of them could be performed
 ![alt](./activity.svg)
 
 Activity diagram show the potential areas of concurrency
+When can find activities that take time, but not time in
+our code.Querying a dataabase, accesing an external service, waiting for user input.
+
+### Opportunties for parallelism
+
+Remember the distinction: concurrency is a software mechanism, and paralleslims is a hardware concern.
+
+If we have multiple processors either locally or remotely, then if we can split work out among them we can reduce the overall time things take.
+
+The ideal things to split this way are pieces of work that are relatively indepedent, where each can proceed without waiting for anyhting from the others. A common pattern is to take a large piece of work, split it into independant chunks, process each in parallet , then combine the result.
+
+## Shared State Is Incorrect State
+
+Example:
+
+You're in your favorite diner. YOu finish your main course, and ask your server if there's any apple pie left.
+
+He lloks over his shoulder, sees one piece in the display case and says yes. You order it and sight contentedly.
+
+Meanwhile, on the other side of the restaurant, another customer asks their server the same question. She also looks, confirms there's a piece, and that customer orders.
+
+One of the customers is going to be disappointed.
+
+### Nonatomic Updates
+
+![Nonatomic Updates](./noatomic_update.svg)
