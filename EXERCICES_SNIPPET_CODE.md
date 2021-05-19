@@ -879,3 +879,66 @@ One of the customers is going to be disappointed.
 ### Nonatomic Updates
 
 ![Nonatomic Updates](./noatomic_update.svg)
+
+Waiter 1 gets the current pie count, and finds that it is one. He promises the pie to the customer.
+But at that point waiter 2 runs and she alos sees the pie count is one and make the same promise to her customer.
+The problem here is not hat two processes can write to the same memory. The problem is that neighter process can guarantee that its view of that memory is consistent.
+
+### Semaphores and Other Forms of Mutual Exclusion
+
+A semaphore is simply a thing that only one person
+can own at a time.
+You can create a semaphore and the use it to control access to some other resource.
+
+example with waiter:
+
+```ruby
+
+case_semaphore.lock()
+
+if display_case.pie_count > 0
+
+promise_pie_to_customer()
+display_case.take_pie()
+give_pie_to_customer()
+
+end
+
+case_semaphore.unlock()
+
+```
+
+### Make the resource Transactional
+
+The current design is poor because it delegates responsibility for protecting acces to the pie case to the people who use it.
+
+To do this, we have to change the API so that waiters can check the count and alose take a slice in a single call:
+
+```ruby
+
+slice = display_case.get_pie_if_available()
+if slice
+give_pie_to_customer()
+end
+
+```
+
+To make this work, we need to write a method that runs as port of the display cas itself:
+
+```ruby
+def get_pie_if_available()
+@case_semaphore.lock()
+try {
+    if @slices.size > 0
+    update_sales_data(:pie)
+    return @slices.shift
+    else
+    false
+    end
+    end
+} ensure{
+    @case_semaphore.unlock()
+ }
+```
+
+#### Random Failures Are Often Concurrency Issues
