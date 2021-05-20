@@ -6,6 +6,7 @@ specifiers:
   fp-ts: ^2.10.5
   inquirer: ^8.0.0
   lodash: ^4.17.21
+  nact: ^7.6.0
   rxjs: ^6.6.7
   rxjs-compat: ^6.6.7
   ts-node: ^9.1.1
@@ -18,6 +19,7 @@ dependencies:
   fp-ts: 2.10.5
   inquirer: 8.0.0
   lodash: 4.17.21
+  nact: 7.6.0
   rxjs: 6.6.7
   rxjs-compat: 6.6.7
   ts-node: 9.1.1_typescript@4.2.4
@@ -98,6 +100,11 @@ packages:
 
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
+    dev: false
+
+  /denque/1.5.0:
+    resolution: {integrity: sha512-CYiCSgIF1p6EUByQPlGkKnP1M9g0ZV3qMIrqMqZqdwazygIA/YP2vrbcyl1h/WppKJTdl1F85cXIle+394iDAQ==}
+    engines: {node: '>=0.10'}
     dev: false
 
   /diff/4.0.2:
@@ -185,6 +192,12 @@ packages:
 
   /mute-stream/0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
+    dev: false
+
+  /nact/7.6.0:
+    resolution: {integrity: sha512-0UghRQyNUMWLSwPIi7cyp3MXUtMpZLRaSG3bjqEfWO9OxZoUIAMh59raKeoTfnZ33B50CLg3RefXHLQr3kvgmQ==}
+    dependencies:
+      denque: 1.5.0
     dev: false
 
   /onetime/5.1.2:

@@ -942,3 +942,49 @@ try {
 ```
 
 #### Random Failures Are Often Concurrency Issues
+
+## Actors and processes
+
+Actors and processes offer ways of implementing concurrency without the burden of synchronizing access to shared memory.
+
+Actor
+: An actor is an independent virtual processor with its own local ( and private) state.
+Each actor as a mailbox.
+When a message appears in te mailbox and the actor is idle, it kicks into life and processes the message. When it finishes processing, it processes another message in the mailbox, or , if the mailbox is empty, it goes back to sleep.
+
+Process
+: A process is typically a more general-purpose virtual processor, often implemented by the operating system to facilitate concurrency. Processes can be constrained (by convention) to behave like actors, and that's the type of process we mean here.
+
+### Actor can only be concurrent
+
+There are thing that are not in the definition of actors:
+
+- There's no single thing that's in control. Nothing schhedules what happens next, or orchestrates the transfer of information from the raw data to the final output
+
+- State in the system is held in messages and in the local state of each actor.Messages cannot be examined except by being read by their recipient, and local state is inaccesible outised the actor.
+- All messages are one way there's no concept of replying. If you want an actor to return response, you include your own mailbox address in the message you send it, and it will (eventually) send the response as just another message to that mailbox.
+
+- An actor processes each message to completion, and only processes one message at a time.
+
+As a result, actors execute concurrently, asynchronously and share nothing. If you had enough physical processors you could run an actor on each. If you have a single processor, then some runtime can handle the switching of context betweenb them. Either way, the code running in the actors is the same
+
+> Use Actors for Concurrency Without Shared State
+
+### A Simple Actor
+
+Let's implement our diner using actors. In this case, we'll have three (the customer, the waiter, and the pie case).
+
+the overall message flow will look like this: this
+
+- We ( as some kind of external, God-like being) tell the customer that they are hungry
+- second
+- In response, they'll ask the waiter for pie
+- The waiter will ask the pie case to get some pie to the customer
+- If the pie case has a slice available, it will send it to the customer, and also notify the waiter to add it to the bill
+- If there is no pie, the case telle the waiter, and te waiter apologizes to the customer
+
+The customer can receive three messages:
+
+- You're hungry ( send by the external context)
+- There's pie on the table ( sent by pie case )
+- Sorry, there's no pie ( send by the waiter )
