@@ -988,3 +988,28 @@ The customer can receive three messages:
 - You're hungry ( send by the external context)
 - There's pie on the table ( sent by pie case )
 - Sorry, there's no pie ( send by the waiter )
+
+[Actor/Processus](./examples/actors/index.ts)
+
+### No Explicit Concurrency
+
+In the actor model, there's no need to write any code to handle concurrency as there is no shared state. There's also no need to code in explicit end-to-end "do this, do that" logic, as the actors work it out for themselves based on the messages they receive.
+
+There's also no mention of the underlying architecture. This set of components work equally well on a single processor, on multiple cores, or multiple networked machines.
+
+### Erlang Sets the Stage
+
+The erlang language and runtime are great examples of an actor implementation. Erlang calls actors processes.
+
+Erlang processes are lightweight and they communicate by sending messages.
+Each is isolated from the others, so there is no sharing of state.
+In addition, the Erlang runtime implements a supervision system which manages the lifetimees of set of processes in case of failure.
+
+### Blackboards
+
+Consider how detectives might use a blackboard to coordinate and solve a murder investigation.
+The chief inspector starts off by setting up a large blackboard in the conference room. On it , she writes a single question:
+
+H.Dumpty (Male,Egg): Accident ? Murder ?
+
+> Use blackboards to Coordinate workflow
