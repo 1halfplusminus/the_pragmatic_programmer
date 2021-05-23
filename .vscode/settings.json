@@ -8,5 +8,6 @@
     "default": true,
     "MD033": { "allowed_elements": ["img"] }
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

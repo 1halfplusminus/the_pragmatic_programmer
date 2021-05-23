@@ -1,16 +1,9 @@
-import {
-  ActorFunc,
-  start,
-  dispatch,
-  stop,
-  spawnStateless,
-  spawn,
-  Ref,
-} from "nact";
-
+import { start, dispatch, spawn } from "nact";
+declare type Ref<T> = T;
 declare interface State {
-  waiter: string;
-  pieCase: Ref<unknown>;
+  waiter: Ref<Waiter>;
+  pieCase: Ref<PieCase>;
+  slices: string[];
 }
 declare type HungryForPie = {
   type: "hungry for pie";
@@ -26,6 +19,7 @@ declare type PutOnTable = {
 };
 declare type NoPieLeft = {
   type: "no pie left";
+  msg: string;
 };
 
 declare type GetSlice = {
@@ -34,42 +28,74 @@ declare type GetSlice = {
   waiter: Ref<Waiter>;
 };
 
-declare type Message = Order | HungryForPie | PutOnTable | NoPieLeft;
+declare type AddToOrder = {
+  type: "add to order";
+  food: string;
+  customer: Ref<Customer>;
+};
+
+declare type Error = {
+  type: "error";
+  msg: string;
+  customer: Ref<Customer>;
+};
+
+declare type Message =
+  | Order
+  | HungryForPie
+  | PutOnTable
+  | NoPieLeft
+  | AddToOrder
+  | Error
+  | GetSlice;
 
 declare type Customer = {
   name: string;
 };
 declare type Waiter = {};
+
 declare type PieCase = {};
 
 const isCustomer = (type: any): type is Customer => "name" in type;
 const system = start();
+const initalState = { slices: ["apple", "peach", "cherry"] };
 
-const customerActor = spawn(
+const pieCaseActor = spawn(
   system,
-  (state: State, msg: Message, { self }) => {
-    if (isCustomer(self)) {
-      if (msg.type === "hungry for pie") {
-        return dispatch(state.waiter, {
-          type: "order",
-          customer: self,
-          wants: "pie",
+  (state = initalState, msg: Message, { self }) => {
+    if (msg.type === "get slice") {
+      if (state.slices.length == 0) {
+        dispatch(msg.waiter, {
+          type: "error",
+          msg: "no pie left",
+          customer: msg.customer,
+        } as Error);
+        return state;
+      } else {
+        const slice = state.slices.shift() + " pie slice";
+        dispatch(msg.customer, {
+          type: "put on table",
+          food: slice,
+        } as PutOnTable);
+        dispatch(msg.waiter, {
+          type: "add to order",
+          food: slice,
+          customer: msg.customer,
         });
-      }
-      if (msg.type === "put on table") {
-        console.log(`${self.name} sees ${msg.food} appear on the table`);
-      }
-      if (msg.type === "no pie left") {
-        console.log(`${name} sulks...`);
+        return state;
       }
     }
   },
-  "customer"
+  "pieCase"
 );
 
 const waiterActor = spawn(
   system,
-  (state: State, msg: Message, { self }) => {
+  (
+    state: State = { ...initalState, pieCase: pieCaseActor, waiter: {} },
+    msg: Message,
+    { self }
+  ) => {
     if (msg.type === "order") {
       if (msg.wants == "pie") {
         dispatch(state.pieCase, {
@@ -81,6 +107,58 @@ const waiterActor = spawn(
         console.log(`Don't know ho to oder ${msg.wants}`);
       }
     }
+    if (msg.type === "add to order") {
+      console.log(`Waiter adds ${msg.food} to ${msg.customer.name}'s order`);
+    }
+    if (msg.type === "error") {
+      dispatch(msg.customer, {
+        type: "no pie left",
+        msg: msg.msg,
+      } as NoPieLeft);
+      console.log(
+        `\nThe waiter apologizes to ${msg.customer.name}: ${msg.msg}`
+      );
+    }
+    return state;
   },
   "waiter"
 );
+
+const customerActorFactory = (name: string) =>
+  spawn(
+    system,
+    (
+      state = {
+        waiter: waiterActor,
+      },
+      msg: Message,
+      { self }
+    ) => {
+      if (isCustomer(self)) {
+        if (msg.type === "hungry for pie") {
+          return dispatch(state.waiter, {
+            type: "order",
+            customer: self,
+            wants: "pie",
+          });
+        }
+        if (msg.type === "put on table") {
+          console.log(`${self.name} sees ${msg.food} appear on the table`);
+        }
+        if (msg.type === "no pie left") {
+          console.log(`${self.name} sulks...`);
+        }
+      }
+      return state;
+    },
+    name
+  );
+
+const customerActor1 = customerActorFactory("Allan");
+const customerActor2 = customerActorFactory("Pas-Riche");
+
+dispatch(customerActor1, { type: "hungry for pie" } as HungryForPie);
+dispatch(customerActor2, { type: "hungry for pie" } as HungryForPie);
+dispatch(customerActor1, { type: "hungry for pie" } as HungryForPie);
+dispatch(customerActor2, { type: "hungry for pie" } as HungryForPie);
+dispatch(customerActor1, { type: "hungry for pie" } as HungryForPie);
