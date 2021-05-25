@@ -1013,3 +1013,32 @@ The chief inspector starts off by setting up a large blackboard in the conferenc
 H.Dumpty (Male,Egg): Accident ? Murder ?
 
 > Use blackboards to Coordinate workflow
+
+Each detective make contributions to this potentail murder mystery by adding facts, statetements, forensic evidence that might arise, and so on
+
+Some key features of the blackboard approach are :
+
+- None of the detective needs to know of the existence of any other detective they watch the board for new information, and add their findings
+- The detectives may be trained in different disciplines, may have different levels of education and expertise, and may not even work in the same precinct. They share a desire to solve the case, but that's all.
+- Different etectives may come and go during the course of the process, and may work different shifts.
+- There are no restrictions on what may be placed on the blackboard. It may be pictures, sentences, physical evidence, and so on.
+
+This is a form of laissez faire concurrency. The detecctives are independent processes, agents, actors and so on. Some store facts on the blackboard. Other take facts off the board, maybe combining or processing them, and add more information to the board.
+
+Computer base blackboard systems were originally used in artificial intelligence applications.
+where the problems to solved were large and complex speech recognition, knowledge based reasoning systems, and so on.
+
+### A blackboard in Action
+
+Suppose we are writing a program to accept and process mortgage or loan applications.
+Te laws that govern this area are odiously complex, with federal, state, and local governments all having their say.
+
+The lender must prove they have disclosed certain things, and must ask for certain information - but must not ask certain other questions, and so on ,and so on. Some
+
+There is also the following problems to contend with:
+
+- Responses can arrive in any order. For instance, queries for a credit check or title search may take a substantial amount of time, while items such as name and address may be available immediately.
+- Data gathering may be done by different people, distributed across different offices, in different time zones
+- Some data gathering may be done automatically by other systems. This data may arrive asynchronously as well.
+- Nonetheless, certain data may still be dependent on other data. For instance , you may not be able to start the title search for a car until you get proof of ownership or insurance.
+- The arrival of new data may raise new questions and policies. Suppose the credit check come back with a less glowing report; now you need these five extra forms and perhaps a blood sample.
