@@ -1042,3 +1042,49 @@ There is also the following problems to contend with:
 - Some data gathering may be done automatically by other systems. This data may arrive asynchronously as well.
 - Nonetheless, certain data may still be dependent on other data. For instance , you may not be able to start the title search for a car until you get proof of ownership or insurance.
 - The arrival of new data may raise new questions and policies. Suppose the credit check come back with a less glowing report; now you need these five extra forms and perhaps a blood sample.
+
+You can try handle every possible combination and circumstance using a workflow system. Here
+Many such systems exist, but they can be complex and programmer intensive.
+As regulation change, thew workflow muste be reorganized: people may have to change their procedures and hard-wired code may have to be rewritten.
+
+A blackboard, in combination with a rulesengine that encapsulates the legal requirements, is an elegant solution to the difficulties found here. Order of data arrival is irrelevant: when a fact is osted it can trigger the appropriate rules.
+
+Feedback is easily handled as well: the output of any set of rules can post to the blackboard and cause the triggering of more applicable rules.
+
+> Use blackboard to Coordinate Workflow
+
+### Messaging systems can be like Blackboards
+
+Many applications (micro service) are constructed using small, decoupled service, all communicating via some form of messaging sytem. These messasing systems (such as Kafka and NATS)
+do far more thant simply send data from A to B. In particular they offer persistence (in form of an evant log) and the ability to retrieve messages though a form of pattern matching. This means you can use them both as a blackboard system and or as platform on which you can run a bunch of actors.
+
+### But It's Not That Simple
+
+The actor and/or blackboard and/or microservice approach to architecture removes a whole class of potential concurrency problems from your applications. But that benefit comes at a cost. These approaches are harder to reason about, because a lot of the action is indirect. You'ill find it helps to keep a central repository of message formats and/or APIs, particularly if the repository can generate the code and documentation for you.You'll also need good tooling to be able to trace messages and facts as they progress through the system. You
+
+Finally, these kinds of system can be more troublesome to deploy and manage, as there are more moving parts. To some extend this offset by the fact that the system is more granular, and can be updated by replacing individual actors, and not the whole system.
+
+## While your are coding
+
+Many people thinks that when a project is a coding phase, the work is mostly mechanical, transcribing design into executable statements.
+
+That attitute is a big reason that software projects fail, and many sytems end up ugly, inefficient, poorly structured, unmaintainable, or just plain wrong.
+
+Coding is not mechanical. If it were , all the CASE tools that people pinned their hopes on way back in the early 1980s would have replaced programmers long ago.
+
+There are decisions to be made every minute , decisions that require careful thought and judgment if the resulting program is to enjoy a long, accurate, productive life.
+
+Not all decisions are even conscious. You can harness your instincts and nonconscious thoughts when you Listen to Your Lizard Brain.
+
+Listening to your instincts doesn't mean you can fly on autopilot. Developers who don't actively think about their code are programming by coincidence. The code might work, but there's no particular reason why.
+
+While most of code are fast, sometime we develop algorithms that have the potential to bog down the fastest processors. Algorithms Speed is a ways to estimate the speed of code.
+
+
+Testing is not about finding bugs, it's about getting feedback on your code: aspects of design, the API, coupling, and so on. The
+
+That means that the major benefits of testing happend when you think about and write them.
+
+It's critical that code is readable and easy to reason about.
+
+One of the hardest things in software development is Naming Things.
