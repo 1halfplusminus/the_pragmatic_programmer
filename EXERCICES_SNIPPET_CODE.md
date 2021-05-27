@@ -1080,7 +1080,6 @@ Listening to your instincts doesn't mean you can fly on autopilot. Developers wh
 
 While most of code are fast, sometime we develop algorithms that have the potential to bog down the fastest processors. Algorithms Speed is a ways to estimate the speed of code.
 
-
 Testing is not about finding bugs, it's about getting feedback on your code: aspects of design, the API, coupling, and so on. The
 
 That means that the major benefits of testing happend when you think about and write them.
@@ -1088,3 +1087,33 @@ That means that the major benefits of testing happend when you think about and w
 It's critical that code is readable and easy to reason about.
 
 One of the hardest things in software development is Naming Things.
+
+### Fear of the Blank Page
+
+Everyone fears the empty screen, the lonely blinking cursor surrounded by a whole bunch of nothing. Starting a new project (or even a new module in an existing project) can be an unnerving experience.
+
+Many of use would prefer to put off making the inital commitment of starting.
+
+We think that there are two problems that cause this and that both have the same solution.
+
+One problem is that your lizard brain is trying to tell you something there's some kind of doubt lurking juste below the surface of perception. And that's important.
+
+As a developer, you've been trying things and seeing which worked and which didn't. You've been accumulating experience and wisdom. When you feel a nanning doubt, or experience some reluctance when faced with a task, it miht be that experience trying to speak to you. Heed it. you may not be able to put your finger on exactly what's wrong, but give it item and your doubts will probably crystallize into something you can address.
+
+Let your instincs contribute to your performance.
+
+The other problem is a little more prosaic: you might simply be afraid that you'll make a mistake.
+
+And that's a reasonable fear. We developers put a lot of ourselves into our code; we can take errors in that code as reflections on our competence. Perhaps there's an element of imposter syndrome too; we may think that this project is beyond us. We can't see our way through to the end; we'll get so far and then be forced to admit that we're lost.
+
+### Fighting Yourself
+
+Sometimes code just flies from your brain into the editor: ideas become bits with seemingly no effort.
+
+Orther days, coding feels like walking uphill in mud. Taking each step requires tremendous effort, and every three steps you slide back two.
+
+But, being a professional, you soldier on, taking step after muddy step: you have a job to do.
+Unfortunaly, that's probaly the exact opposite of what you should do.
+
+Your code is trying to tell you something. It's saying that this is harder that it should be.
+Maybe the structure or design is wrong, maybe you're solving the wrong problem, or maybe you're just creating an ant farm's worth of bugs. Whatever the reason, your lizard brain is sensing feedback from the code, and it's desperately trying to get you to listen.
