@@ -1117,3 +1117,21 @@ Unfortunaly, that's probaly the exact opposite of what you should do.
 
 Your code is trying to tell you something. It's saying that this is harder that it should be.
 Maybe the structure or design is wrong, maybe you're solving the wrong problem, or maybe you're just creating an ant farm's worth of bugs. Whatever the reason, your lizard brain is sensing feedback from the code, and it's desperately trying to get you to listen.
+
+### How to Talk Lizard
+
+We talk a lot about listening to your instincts, to your nonconsicous, lizard brain. The techniques are always the same.
+
+> Listen To Your Inner Lizard
+
+First, stop what you're doing. Give yourself a little time and space to let your brain organize itselft. Stop thinking about the code, and do something that is fairly mindless for a while away from a keyboard. Take a walk, chat with someone. Maybe sleep on it. let the ideas percolate up through the layers of your brain on their own: you can't force it. Eventually they may buble up to the conscious level, and you have one of those a ha! moments.
+
+If that's not working, try externalizing the issue. Make doodles about the code you're writing, or explain it to a coworker (preferably one who isn't a programmer), or to your rubber duck. Expose different parts of your brain to the issue, and see if any of them have a better handle on the thing that's troubling you. We've lost track of the number of conversaiton we've had where one of us was explaining a problem to the other and suddenly "Oh! Of course!" and broke off to fix it.
+
+But maybe you've tried these things, and you're still stuck. It's time for actions. We need to tell your brain that what you're about to do doesn't matter. And we do that by prototyping.
+
+### It's Playtime!
+
+Tell yourself you need to prototype something if you're facing a blaknk screen, then look for some aspect of the project that you want to explore. Maybe you're using a new framework, and want to see how it does data binding. Or maybe it's a new algorithm, and you want to explore how it works on edge cases. Or maybe you want to try a couple of different styles of user interaction.
+
+If you're working on existing code and it's pushing back, then stash it away somewhere and prototype up something somilar instead.
