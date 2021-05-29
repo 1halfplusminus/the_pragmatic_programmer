@@ -1135,3 +1135,32 @@ But maybe you've tried these things, and you're still stuck. It's time for actio
 Tell yourself you need to prototype something if you're facing a blaknk screen, then look for some aspect of the project that you want to explore. Maybe you're using a new framework, and want to see how it does data binding. Or maybe it's a new algorithm, and you want to explore how it works on edge cases. Or maybe you want to try a couple of different styles of user interaction.
 
 If you're working on existing code and it's pushing back, then stash it away somewhere and prototype up something somilar instead.
+
+Do the following.
+
+1. Write "I'm prototyping" on a sticky note and stick it on the side of your screen.
+2. Remind yourself that prototypes are meant to fail. And remind yourself that prototypes get thrown away, even if they don't fail. There is no downside to doing this.
+3. In your empty editor buffer, create a comment describing in one sentence what you want to learn or do.
+4. Start coding
+
+If you start to have doubts, look at the sticky note.
+If, in the middle of coding, that nagging doubt suddenly crystallizes into a solid concern, then address it.
+
+If you get to the end of the experiment and you still feel uneasy, start again with the walk and the talk and the talk and the time off.
+
+But, in our experecience, at some point during the first prototype you will be surprised to find yourself humming along with your music enjoying the feeling of creating code. The nervousness will have evaporeted, replaced by a feeling of urgency, let's get this done!
+
+At this stage, you know what to do. Delete all the prototype code, throw away the sticky note and fill that empty editor buffer with bright shiny new code.
+
+### Not Just Your Code
+
+A large part of our job is dealing with existing code, often written by other
+people. Those people will have different instincts to you, and so the decisions they made will be different. Not necessarily worse; just different.
+
+You can read their code mechanically, slogging through it making notes on stuff that seems important. It's a chore, but it works Or you can try and experiment. When you spot things done in a way that seems strange, jot it down. Continue doing this, and look for patterns. If you can see what drove them to write code that way, you may find that the job of understanding it becomes a lot easier, You'll be able consciously to apply the patterns that they applied tacitly.
+
+And you might just learn something new along the way.
+
+### Not Just Code
+
+Learning to listen to your gut when coding is an import skill to foster. But it applies to the biggger picture are well. Sometimes a design just feels wrong, or some requirement makes you feel uneasy. Stop and analyze the feelings. If you're in a supportive environment, express them out loud. Explore them. The chances are that there's something lurking in that dark doorway. Listen to your instincts and avoid the problem before it jumps out of you.
