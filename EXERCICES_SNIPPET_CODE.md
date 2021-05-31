@@ -1172,3 +1172,44 @@ Suppose Fred is given a programming assignment. Fred types in some code, tries i
 ### Accidents of Implementations
 
 Accidents of implementation are things that happen simply because that's the way the code is currently written? you end up relying on undocumented error or boundary conditions.
+
+Suppose you call a routine with bad data. The routine responds in a particular way, and you code based on that response. But the author didn't intend for the routine to work that way it was never even considered.
+When the routine gets "fixed" your code may break. In the most extreme case, the routine you called may not even be designed to do what you want, but it seems to work okay. Calling things in the wrong order, or in the wrong context, is a related problem.
+
+Here it looks like Fred is desperately trying to get something out on the screen using some particular GUI rendering framework:
+
+paint();
+invalidate();
+validate();
+revalidate();
+repaint();
+paitImmediately();
+
+But these routines were never designed to be called this way;
+although they seem to work, that's really just a coincidence.
+
+To add insult to injury, when the scene finally does get drawn,
+Fred won't try to go back and take out the spurious calls. "It works now, better leave well enough alone..."
+
+It's easy to be fooled by this line of thought. Why should you take the risk of messing with something that's working ? Well, we can think of several reasons:
+
+- It may not really be working, it might just look like it is
+- The noundary condition you rely on may be just an accident. In different circumstances (a diferent screen resolution, more CPU cores), it might behave differently.
+- Undocumented behavior may change with the next release of the library.
+- Additional and unnecessary calls make your code slower.
+- Additionla calls increase the risk of introducing new bugs of their own.
+
+For code you write that others will call, the basic principles of good modularization and of hiding implementation behind small, well-documented interfaces can all help. A well specified contract can help elimate misunderstandings.
+
+For routines you call, rely only on documented behavior. If you can't , for whatever reason, then document your assumption well.
+
+### Close Enough Isn't
+
+We once worked on a large project that reported on data fed from a very large number of hardware data collection units out in the field. These units spanned states and time zones, and for various logistical and historical reasons, each unit was set to local time.As a result of conflicting time zone interpreations and inconsistencies in Daylight Saving Time policies, results were almost always wrong, but only off by one. The developers on the project had gotten ionto the habit of just adding one or subtracting one to get the correct answer, reasoning that it was only off by one in this one situation. And then the next function would see the value as off by the one the other way, and change it back.
+
+But the fact that it was "only" off by one some of the time was a coincidence, masking a deeper and more fundamental flaw.
+Without a proper model of time handling, the entire large code base had devolved over time to an untenable mass of +1 and -1 statements. Ultimately, none of it was correct and the project was scrapped.
+
+### Phantom Patterns
+
+Human beings are designed to see patterns and causes, even when it's just a coincidence. For example, Russian leaders always alternate between being bald and hairy: a bald (or obviously balding) state leader of Russia has succeded a non-bald ("hairy") one, and vice versa, for nearly 200 years.
