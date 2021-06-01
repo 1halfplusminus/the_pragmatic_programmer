@@ -1213,3 +1213,22 @@ Without a proper model of time handling, the entire large code base had devolved
 ### Phantom Patterns
 
 Human beings are designed to see patterns and causes, even when it's just a coincidence. For example, Russian leaders always alternate between being bald and hairy: a bald (or obviously balding) state leader of Russia has succeded a non-bald ("hairy") one, and vice versa, for nearly 200 years.
+
+But while you wouldn't writre code that depended on the next Russisan leader being bald or hairy, in some domains we think that way all the time.
+Gamblers image patterns in lottery numbers, dice game, or roulette, when in fact these are statistically independent events. In finance, stock and bond trading are similarly rife with coincidence instead of actual, discernible patterns.
+
+A log file that shows an intermittend error every 1,000 request may be diffucult-to-diagnose race condition, or may be a plain old bug. Tests that seem to pass on machine but not on the server might indicate a difference between the two environments, or maybe it's just a coincidence.
+
+Don't assume it, prove it.
+
+### Accidents of Context
+
+You can have "accidents of context" as well. Suppose you are writing a utility module, juste because you currently coding for a GUI environment does the module have to rely on a GUI being present ? Are you relying on English-speaking users ? Literate users ? Wat else are you relying on that isn't guaranteed ?
+
+Are you relying on the current directory being writable ? On certain environment variables or configuration files being present ? On the timeon the server being accurate -- within what tolerance ? Are you relying on network availability and speed ?
+
+When you copied code from the first answer you found on the net, are you sure your context is the same ? Or are you building "cargo cult" code, merely imitaing fomr without content ?
+
+Finding an answer that happends to fit is not the same as the right answer.
+
+> Don't Program by Coincidence
