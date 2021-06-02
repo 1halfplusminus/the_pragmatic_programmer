@@ -1232,3 +1232,27 @@ When you copied code from the first answer you found on the net, are you sure yo
 Finding an answer that happends to fit is not the same as the right answer.
 
 > Don't Program by Coincidence
+
+### Implicit Assumptions
+
+Coincidences can mislaed at all levels from generating requirements through to testing.
+
+Testing is particularly fraught with false causalities and coinccidental outcomes. It's easy to assume that X causes Y but assuming is not enough you need to prove it.
+
+At all levels, people operate with many assumptions in mind but these assumptions are rarely documented and are often in conflict between different developers. Assumptions that aren't based on well-established facts are the bane of all projects.
+
+### How to Program Deliberately
+
+We want to spend less time churning out code, catch and fix errors as early in the development cycle as possible and create fewer erros to begin with. It helps if we can program deliberately:
+
+- Always be aware of waht you are doing.
+- Can you explain the code, in detail, to a more junior programmer ? if not, perhaps you are relying on coincidences.
+- Don't code in the dark. Build an application you don't fully graps, or use technology you don't understant, and you'll likely be bitten by coincidences. If you're not sure why it works, you won't know why it fails.
+- Proceed from a plan, whether that plan is in your head, on the back of a cocktail napkin, or on a whiteboard.
+- Rely only on reliable things. Don't depend on assumptions. If you can't tell if something is reliable, assume the worst.
+- Document your assumptions. Design by contract, can help clarify your assumptions in your own mind, as well as help communicate them to others.
+- Don't just test your code, but test your assumptions as well. Don't guess; actually try it. Write an assertion to test your asumptions. If your assertion is right, you have improved the documentation in your code. If you discover your assumptions is wrong, then count yourself lucky.
+- Prioritize your effort. Spend time on the important aspects; more than likely, these are the hard parts. If you don't have a fundamentals or infrastructure correct, brilliant bells and whistles will be irrelevant.
+- Don't be a slave to history.Don't let existing code dictate future code. All code can be replaced if it is no longer appropriate.Even within one program, don't let what you've already done constrain what you do next be ready to refactor. This decision may impact the project schedule. The assumption is that impact will be less than the cost of not making change.
+
+So next time something seems to work, but you don't know why make sur it isn't just a coincidence.
