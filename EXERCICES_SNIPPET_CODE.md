@@ -1256,3 +1256,27 @@ We want to spend less time churning out code, catch and fix errors as early in t
 - Don't be a slave to history.Don't let existing code dictate future code. All code can be replaced if it is no longer appropriate.Even within one program, don't let what you've already done constrain what you do next be ready to refactor. This decision may impact the project schedule. The assumption is that impact will be less than the cost of not making change.
 
 So next time something seems to work, but you don't know why make sur it isn't just a coincidence.
+
+### Algorithm Speed
+
+Estimating the resources that algorithms use -- time,processor,memory, and so on.
+
+This kind of estimating is often crucial.
+
+#### What Do We Mean By Estimating Algorithms ?
+
+Monstr nontrivial algorigthms handle some kind of variable input -- sorting n strings, inverting a m\*n matrix, or decrypting a message with an n-bit key.
+Normally, thesize of this input will affect the algorithm: the larger the input, the longer the running time or the more memory used.
+
+If the relationship where always linear ( so that the time increased in direct proportion to the value of n), this section wouldn't be important. However, most significant algorithms are not linear. The good news is that many are sublinear. A binary search, for example, doesn't need to llok at every candidate when finding a match. the bad news is that other algorithms are considerably worse than linear; runtimes or memory requirements increase far faster than n.
+An algorithm that takes a minute to process ten items may take a lifetime to process 100.
+
+We find that whenever we write anything containing loops or recursive calls, we subconsciously check the runtime and memory requirements. this is rarely a formal process, but rather a quick confirmation that what we're doing is sensible in the circumstances. However, we sometimes do find ourselves perfoming a more detailed analysis. That's when Big-O notaiton comes in handy.
+
+#### Big-O Notation
+
+The Big-O notation, written O(), is a mathematical way of dealing with approximations. When we write that a particular sort routine sorts n records in O(n²) time, we are simply saying that te worst-case time taken will vary as tyhe square of n. Double the number of records, and tyhe time will increase roughly fourfold.Think of the O as meaning on the order of.
+
+The O() notation puts an upper bound on the value of the thing we're measuring(time, memory, and so on). If we say a function takes O(n2) time, then we know that the upper bound of the time it takes will not grow faster than n². Sometimes we come up with fairly complex O() functions, but because the hightest-order term will dominate the value as n increases, the convention is to remove all low-order terms, and not to bother showing any constant multiplying factors:
+
+O(n²/2+3n) is the same as O(n²/2) is the same as O(n²)
