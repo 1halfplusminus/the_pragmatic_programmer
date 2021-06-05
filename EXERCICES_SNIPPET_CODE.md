@@ -1275,8 +1275,22 @@ We find that whenever we write anything containing loops or recursive calls, we 
 
 #### Big-O Notation
 
-The Big-O notation, written O(), is a mathematical way of dealing with approximations. When we write that a particular sort routine sorts n records in O(n²) time, we are simply saying that te worst-case time taken will vary as tyhe square of n. Double the number of records, and tyhe time will increase roughly fourfold.Think of the O as meaning on the order of.
+The Big-O notation, written O(), is a mathematical way of dealing with approximations. When we write that a particular sort routine sorts n records in O(n²) time, we are simply saying that te worst-case time taken will vary as time square of n. Double the number of records, and time will increase roughly fourfold.Think of the O as meaning on the order of.
 
 The O() notation puts an upper bound on the value of the thing we're measuring(time, memory, and so on). If we say a function takes O(n2) time, then we know that the upper bound of the time it takes will not grow faster than n². Sometimes we come up with fairly complex O() functions, but because the hightest-order term will dominate the value as n increases, the convention is to remove all low-order terms, and not to bother showing any constant multiplying factors:
 
 O(n²/2+3n) is the same as O(n²/2) is the same as O(n²)
+
+This is actually a feature of the O() notation one O(n²) algorithm may be 1000 times faster than another O(n²) algorithm, but you won't know from the notation. Big-O is never going to give you actual numbers for time or memory or whatever: it simply tells how these values will change as the input change.
+
+For example, suppose you've got a routine that takes one second to process 100 records. How long will it take to process 1000 ? if your code is O(1) then it will still take one second. If it's O(lg n), then you'll probably be waiting about three seconds. O(n) will show example, it is often useful to be able to model memory consumption.
+
+O(1) Constant (access element in array, simple statements)
+O(lg n) logarithmic (binary search). The base of the logarithm doesn't matter, so this is equivalent O(log n)
+O(n) Linear (sequential search)
+O(n lg n) Wore than linear, but not much worse. (Average runime of quicksort, heapsort)
+O(n²) Square law (selection and insertion sorts)
+O(n^3) Cubic (multiplication of two nxn matrices)
+O(c^n) Exponetial (traveling salesman problem, set partitioning)
+
+![Various Algorithms Time](./various%20algorithms.png)
