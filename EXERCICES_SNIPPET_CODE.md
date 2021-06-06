@@ -1294,3 +1294,24 @@ O(n^3) Cubic (multiplication of two nxn matrices)
 O(c^n) Exponetial (traveling salesman problem, set partitioning)
 
 ![Various Algorithms Time](./various%20algorithms.png)
+
+## Runtimes of various algorithms
+
+### Common Sense Estimation
+
+You can estimate the order of many basic algorithms using common sense. For
+
+#### Simple loops
+
+If a simple loop runs from 1 to n, then the algorithm is likely to be o(n) time increases linearly with n.
+Examples include exhaustive searches, finding the maximun value in an array, and generating checksums.
+
+#### Nested Loops
+
+If you nest a loop inside another, then your algorithms becomes O(m x n), where m and n are the two loops'limits.
+This commonly occurs in simple sorting alhorithms, such as bubbled sort, where the outer loop scans each element in the array in turn, and the inner loop works out where to place that element in the sorted result.
+Such sorting algorithms tend to be O(n²)
+
+#### Binary chop
+
+If your alhorithm halves the set of things it considers each time aroud the loop, then it is likely to be logarithmic, O(lg n). A binary search of a sorted list, traversing a binary tree, and finding the first set bit in a machine word can all be O(lg n)
