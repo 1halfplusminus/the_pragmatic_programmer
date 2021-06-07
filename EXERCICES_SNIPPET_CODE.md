@@ -1315,3 +1315,15 @@ Such sorting algorithms tend to be O(n²)
 #### Binary chop
 
 If your alhorithm halves the set of things it considers each time aroud the loop, then it is likely to be logarithmic, O(lg n). A binary search of a sorted list, traversing a binary tree, and finding the first set bit in a machine word can all be O(lg n)
+
+#### Divide and conquer
+
+Algorithms that partition their input work on the two halves independently, and then combine the result can be O(nlgn). The classic example is quicksort, which works by partitioning the data into two halves and recursively sorting each. Althought technically O(n²), because its behavior degrades when it is fed sorted input, the average runtime of quicksort is O(nlgn)
+
+#### Combinatoric
+
+Whenever algorithms start looking at the permutations of things, their running times may get out of hand. This is because permutations involve factorial (there are 5!= 5*4*3*2*1 = 120 permutations of the digits from 1 to 5). Time a combinatoric algorithm for five elements: it will take six times longer to run it for six and 42 times longer for seven.
+
+Examples include algorithms for many of the acknowledged hard problems, the traveling salesman problem, optimally packing things into a container, partitioning a set of numbers so that each set has the same total, and so on.
+
+Often, heuristics are used to reduce the running times of these types of algorithms in particular domains.
