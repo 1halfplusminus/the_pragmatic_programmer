@@ -1327,3 +1327,37 @@ Whenever algorithms start looking at the permutations of things, their running t
 Examples include algorithms for many of the acknowledged hard problems, the traveling salesman problem, optimally packing things into a container, partitioning a set of numbers so that each set has the same total, and so on.
 
 Often, heuristics are used to reduce the running times of these types of algorithms in particular domains.
+
+#### Algorithm Speed in Practice
+
+Whenever you find yourself writing a simple loop, you know that yu have a O(n) algorithm. If that loop contains an inner loop, then you're looking at O(m x n). You should be asking yourself how large these values can get. If the numbers depend on external factors then you might want to stop and consider the effect that large values may have on your running time or memory consumption.
+
+> Estimate the Order of Your Algorithms
+
+There are some approaches you can take to address potential problems.
+If you have an algorithm that is O(n2), try to find a divide-and-conquer approach that will take you down to O( n lg n).
+
+After all this estimating, the only timing that counts is the speed of your code, running in the production environment, with real data.
+
+> Test Your Estimates
+
+If it's tricky getting accurate timings, use code profileers to count the number of times the different steps in your algorithm get executed, and plot these figures agains the size of the input.
+
+#### Best Isn't Always Best
+
+Also be wary of premature optimization. It's always a good idea to make sure an algorithm really is a bottleneck before investing your precious time trying to improve it.
+
+### Refactoring
+
+As a program evolves, it will become necessary to rethink earlier decisions
+and rework portions of the code. This process is perfectly natural.
+
+Code needs to evolve; it's not a static thing.
+
+Unfortunately, the most common metaphor for software development is building construction.
+But using construction as the guiding metaphor implies the following steps:
+
+1. An architect draws up blueprints.
+
+2. Contractors dig the foundation, build the superstructure, wire and plumb, and apply finishing touches.
+3. The tenants move in and live happily ever after, calling building maintenance to fix problems.
