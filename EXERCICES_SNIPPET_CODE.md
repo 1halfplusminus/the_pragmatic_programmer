@@ -1361,3 +1361,29 @@ But using construction as the guiding metaphor implies the following steps:
 
 2. Contractors dig the foundation, build the superstructure, wire and plumb, and apply finishing touches.
 3. The tenants move in and live happily ever after, calling building maintenance to fix problems.
+
+Software doesn't work that way. Rather than construction, software is more like gardening , it is more organic than concrete.
+
+You plant manay things in a garden according to an initial plan and conditions.
+
+Some thrive, others are destined to end up as compost. You may move plantings relative to each other to take advantage of the interplay of light and shadow, wind and rain. Overgrown plants get split or pruned, and colors that clash may get moved to more aesthetically pleasing locations.
+
+You pull weeds and you fertilize plantings that are in need of some extra help. You constantly monitor the health of the garden, and make adjustments (to the soil, the plants, the layout) as needed.
+
+Business people are comfortable with metaphor of building construction: it is more scientific than gardening, it's repeatable, there's a rigid reporting hierarchy for management, and so on. But we're not building skyscrapers , we aren't constrained by the boundaries of physics and the real world.
+
+The gardening metaphor is much closer to the realities of software development. Perhaps a certain routine has grown too large, or is trying to accomplish too much. It needs to be split into two. Things that don't work out as planned need to be weeded or pruned.
+
+Rewriting, reworking, and re architecting code is collectively know as restructuring. But there's a subset of that activity that has become practiced as refactoring.
+
+> Refactoring is disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior. It
+
+The critical parts of this definition are that:
+
+1. The activity is disciplined not a free-for-all
+2. External behavior does not change; this is not the time to add features
+
+Refactoring is not intended to be a special, high-ceremony, once-in-a-while activity, like plowing
+under the whole garden in order to replant. Instead, reactoring is a day-to-day activity, taking low-risk
+small steps, more like weeding and raking. Instead of a free-for-all, wholesale rewrite of codebase, it's a targeted,
+precision apporach to help keep the code easy to change.
