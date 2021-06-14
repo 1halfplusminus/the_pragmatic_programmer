@@ -1364,7 +1364,7 @@ But using construction as the guiding metaphor implies the following steps:
 
 Software doesn't work that way. Rather than construction, software is more like gardening , it is more organic than concrete.
 
-You plant manay things in a garden according to an initial plan and conditions.
+You plant things in a garden according to an initial plan and conditions.
 
 Some thrive, others are destined to end up as compost. You may move plantings relative to each other to take advantage of the interplay of light and shadow, wind and rain. Overgrown plants get split or pruned, and colors that clash may get moved to more aesthetically pleasing locations.
 
@@ -1387,3 +1387,29 @@ Refactoring is not intended to be a special, high-ceremony, once-in-a-while acti
 under the whole garden in order to replant. Instead, reactoring is a day-to-day activity, taking low-risk
 small steps, more like weeding and raking. Instead of a free-for-all, wholesale rewrite of codebase, it's a targeted,
 precision apporach to help keep the code easy to change.
+
+In order to guarantee that the external behavior hasn't changed, you need good, automated unit testing that validates the behavior of the code.
+
+### When Should You Refactor ?
+
+You refactor when you've learned something; when you understand something better than you did last year, yesterday, or even just ten minutes ago.
+
+Perhaps you've come across a stumbling block because the code doesn't quite fit anymore, or you notice two things that should really be merged, or anyhting else at all strikes you as being "wrong," don't hesitate to change it. There's no time like the present. Any number of things may cause code to qualify for refactoring:
+
+Duplication
+: You've discovered a violation of DRY principle
+
+Nonorthogonal design
+: You've discovered something that could be made more orthogonal.
+
+Outdated knowledge
+: Things change, requirements drift, and your knowledge of the probleme increases. Codde needs to keep up.
+
+Usage
+: As the system gets used by real people under real circumstances, you realize some features are now more important than previously thought, and "must have" features perhaps weren't
+
+Performance
+: You need to move functionality from one area of the system to another to improve performance.
+
+The Tests Pass
+: Yes. Seriously. We did say that reactoring should be a smal scale activity, backed up by good test. So when you've added a small amount of code, and that one extra test passes, you now have a great opportunity do dive in and tidy up what you just wrote.
