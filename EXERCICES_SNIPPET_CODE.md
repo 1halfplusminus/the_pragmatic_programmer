@@ -1413,3 +1413,25 @@ Performance
 
 The Tests Pass
 : Yes. Seriously. We did say that reactoring should be a smal scale activity, backed up by good test. So when you've added a small amount of code, and that one extra test passes, you now have a great opportunity do dive in and tidy up what you just wrote.
+Refactoring your code moving functionality around and updating earlier decisions -- is really an exercise in pain management. Let's face it, changing source code around can be pretty painful: it was working, maybe it's better to leave well enough alone. Many developers are reluctant to to in an re-open a piece of code just because it isn't quite right.
+
+### Real-World Complications
+
+So you go to your teammates or client and say, "This code works, but i need another week to completely refactor it."
+
+We can't print their reply.
+
+Time pressure if often used as an excuse for not refactoring. but this excuse just doesn't hold up:
+
+Fail to refactor now, and there'll be a far greater time investment to fix the probelm down the road when there are more dependencies to reckon with. Will there be more time available then ? Nope.
+
+You might want to explain this principle to others by using a medical analogy: think of code that needs refactoring as "a growth.". removing it requires invasive surgery. You can go in now, and take it out while it is still small. Or, you could wait while it grows and spreads but removing it then will be both more expensive and more dangerous.
+
+Wait even longer and you may lose the patient entirely.
+
+> Refactor Early, Refactor Often
+
+Collateral damage in code can be just as deadly over time.
+Refactoring, as with most things, is easier to do while the issues are small, as an ongoing activity while coding. Youi shouldn't need "a week to refactor" a piece of code -- that's a full-on rewrite.
+If that level of disruption is necessary, then you might well not be able to do it immediately.
+Instead, make sur that it gets placed on the schedule. Make sure that users of affected code know that it is scheduled to be rewritten and how this might affect them.
