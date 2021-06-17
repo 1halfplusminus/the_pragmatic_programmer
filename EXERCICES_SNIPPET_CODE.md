@@ -1435,3 +1435,15 @@ Collateral damage in code can be just as deadly over time.
 Refactoring, as with most things, is easier to do while the issues are small, as an ongoing activity while coding. Youi shouldn't need "a week to refactor" a piece of code -- that's a full-on rewrite.
 If that level of disruption is necessary, then you might well not be able to do it immediately.
 Instead, make sur that it gets placed on the schedule. Make sure that users of affected code know that it is scheduled to be rewritten and how this might affect them.
+
+### How Do You Refactor ?
+
+Refactoring started out in the Smalltalk community, and had just started to gain a wider audience when we wrote the first edition of this book, probably thanks to the first major book on refactoring (Refactoring: Improving the Design of Existing Code)
+
+At its heart refactoring is redesign.Anything that you or others on your team designed can be redesigned in light of new facts, deeper understandings , changing requirements, and so on. But if you proceed to rip up vast quantities of code with wild abandon, you may find yourself in a worse position than when you started. Clearly, refactoring is an activity that needs to be undertaken slowly, deliberately, and carefully. Martin fowler offers the following simple tips on how to refactor without doing more harm than good.
+
+1. Don't try to refactor and add functionality at the same time
+2. Make sure you have good tests before you begin refactoring. Run the tests as often as possible. That way you will know quickly if your changes have broken anything
+3. Take short, deliberate steps: move a field from one class to another, split a method, rename a variable.Refactoring often involves making many localized changes that result in a larger scale change. If you keep your small and test after each step,you will avoid prolonged debugging
+
+Maintaining good regressions tests is the key to refactoring safely.If you have to go beyond refactoring and end up changing external behavior or interfaces, then it can help to deliberately break the build: old clients of this code should fail to compile. That way you'll know what needs updating. Next time you see a piece of code that isn't quite as it should be, fix it. Manage the pain: if it hurts now, but is going to hurt even more later, you might as well get it over with.
