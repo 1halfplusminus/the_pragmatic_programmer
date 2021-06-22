@@ -1447,3 +1447,50 @@ At its heart refactoring is redesign.Anything that you or others on your team de
 3. Take short, deliberate steps: move a field from one class to another, split a method, rename a variable.Refactoring often involves making many localized changes that result in a larger scale change. If you keep your small and test after each step,you will avoid prolonged debugging
 
 Maintaining good regressions tests is the key to refactoring safely.If you have to go beyond refactoring and end up changing external behavior or interfaces, then it can help to deliberately break the build: old clients of this code should fail to compile. That way you'll know what needs updating. Next time you see a piece of code that isn't quite as it should be, fix it. Manage the pain: if it hurts now, but is going to hurt even more later, you might as well get it over with.
+
+## Test to Code
+
+The major benefits of of testing happen when you think about and write the tests, not when you run them.
+
+> Testing Is Not About Finding Bugs
+
+### Thinking About Tests
+
+It's a monday morning and you settle in to start work on some new code. You have to write something that queries the database to return a list of people who watch more than 10 videos a week on your "world's funniest dishwashing videos" site.
+
+You fire up your editor, and start by writing the function that performs the query:
+
+```ruby
+
+def return_avid_viewers() do
+    #... hmmm ...
+end
+
+```
+
+Stop! How do you know that what you're about to do is a good thing ?
+
+The answer is that you can't know that. No one can. But thinking about tests can make it more likely. Here's how that works.
+
+Start by imagining that you'd finished to writing the function and now had to test it. How would you do that ? Well, you'd want to use some test data, which probably means you want to work in a database you control. Now some frameworks can handle that for you, running test against a test database, but in our case taht means we should be passing the database instance into our function rather than using some global one, as that allows use to change it while testing:
+
+```ruby
+
+def return_avid_users(db) do
+
+end
+
+```
+
+Then we have to think about how we'd populate that test data.
+The requirement ask for a "list of people who watch more than 10 videos a week." So we llok at the database schema for fields that might help. we find two likely fields in a table of who-watched-what: opened_video and completed_video. To write our test data, we need to know which field to use. But we don't know what the requirement means, and our business contact is out.
+
+Let's just cheat and pass in the name of the field (which will allow us to test what we have, and potentially change it later):
+
+```ruby
+
+def return_avid_users(db,qualifying_field_name) do
+
+```
+
+We started by thinking about our tests, and without writing a line of code, we've already made two discoveries and used them to change the API of our method.
