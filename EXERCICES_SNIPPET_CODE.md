@@ -1494,3 +1494,17 @@ def return_avid_users(db,qualifying_field_name) do
 ```
 
 We started by thinking about our tests, and without writing a line of code, we've already made two discoveries and used them to change the API of our method.
+
+### Tests Drive Coding
+
+In the previous example, thinking about testing made us reduce coupling in our code (by passing in a database connection and increase flexibility. Thinking about writing a test for our methode made us look at it from the outside, as if we were a client of the code, and not its author.
+
+> A Test Is the First User of Your Code
+
+This is probably the biggest benefit offered by testing: testing is a vital feedback that guides your coding.
+
+A function or methode that is tightly coupled to other code is hard to test, because you have yo set up all environment before you can even run your method.
+
+So making your stuff testable also reduce coupling.
+
+And before you can test something , you have to understand it. That sounds silly but in reality we've all launched into a piece of code based on nebulous understanding of what we had to do. We assure ourselves that we'll work it out as we go along.
